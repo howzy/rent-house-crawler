@@ -1,0 +1,30 @@
+{
+  "name": "rent-house-crawler",
+  "version": "1.0.0",
+  "description": "豆瓣租房爬虫",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhonce/rent-house-crawler.git"
+  },
+  "keywords": [
+    "crawler",
+    "nodejs",
+    "mongodb"
+  ],
+  "author": "zhonce",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zhonce/rent-house-crawler/issues"
+  },
+  "homepage": "https://github.com/zhonce/rent-house-crawler#readme",
+  "dependencies": {
+    "axios": "^0.16.2",
+    "cheerio": "^1.0.0-rc.2",
+    "mongoose": "^4.11.4"
+  }
+}
