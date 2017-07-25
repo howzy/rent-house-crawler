@@ -1,29 +1,32 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
+var Promise = require('bluebird');
 
 // 获取豆瓣租房列表页信息
 function fetchSingleDoubanList(start) {
-  axios.get(`https://www.douban.com/group/HZhome/discussion?start=${start}`)
-    .then(res => {
-      let htmlText = res.data;
+  return new Promise((resolve, reject) => {
+    axios.get(`https://www.douban.com/group/HZhome/discussion?start=${start}`)
+      .then(res => {
+        let htmlText = res.data;
 
-      const $ = cheerio.load(htmlText);
-      const rs = $('a[title]');
-      const resultList = [];
+        const $ = cheerio.load(htmlText);
+        const rs = $('a[title]');
+        const resultList = [];
 
-      // 提取列表页中每项的标题和链接
-      for (let i = 0; i < rs.length; i++) {
-        resultList.push({
-          title: rs.eq(i).attr('title'),
-          url: rs.eq(i).attr('href')
-        })
-      }
+        // 提取列表页中每项的标题和链接
+        for (let i = 0; i < rs.length; i++) {
+          resultList.push({
+            title: rs.eq(i).attr('title'),
+            url: rs.eq(i).attr('href')
+          })
+        }
 
-      return resultList;
-    })
-    .catch(err => {
-      console.log(err);
-    })
+        resolve(resultList);
+      })
+      .catch(err => {
+        reject(err);
+      });
+  })
 }
 
 // 获取豆瓣租房详情页信息
