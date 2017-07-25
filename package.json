@@ -24,6 +24,7 @@
   "homepage": "https://github.com/zhonce/rent-house-crawler#readme",
   "dependencies": {
     "axios": "^0.16.2",
+    "bluebird": "^3.5.0",
     "cheerio": "^1.0.0-rc.2",
     "mongoose": "^4.11.4"
   }
