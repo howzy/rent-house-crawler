@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
+var mongoUrl = 'mongodb://localhost/rent_house';
 
-mongoose.createConnection('mongodb://localhost/rent_house', {
+mongoose.createConnection(mongoUrl, {
   server: { poolSize: 5 }
 });
 
