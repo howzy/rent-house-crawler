@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+mongoose.Promise = require('bluebird');
 var mongoUrl = 'mongodb://localhost/rent_house';
 
 mongoose.createConnection(mongoUrl, {
