@@ -2,9 +2,7 @@ const mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
 var mongoUrl = 'mongodb://localhost/rent_house';
 
-mongoose.createConnection(mongoUrl, {
-  server: { poolSize: 5 }
-});
+mongoose.connect(mongoUrl);
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'Connection Error:'));
