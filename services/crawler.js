@@ -37,6 +37,7 @@ function fetchSingleDoubanTopic(url) {
         let htmlText = res.data;
 
         const $ = cheerio.load(htmlText);
+        const createTime = $('h3 > span').eq(1).text();
         const ps = $('.topic-content > p');
         const topicPics = $('.topic-figure > img');
         const details = [];
@@ -53,6 +54,7 @@ function fetchSingleDoubanTopic(url) {
         }
 
         resolve({
+          createTime,
           details,
           pics
         });
