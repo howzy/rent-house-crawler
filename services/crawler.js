@@ -38,7 +38,7 @@ function fetchSingleDoubanTopic(url) {
 
         const $ = cheerio.load(htmlText);
         const ps = $('.topic-content > p');
-        const topicPics = $('.topic-content > img');
+        const topicPics = $('.topic-figure > img');
         const details = [];
         const pics = [];
 
