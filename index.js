@@ -1,7 +1,10 @@
 require('./services/mongo');
+const mailer = require('./services/mailer');
 const Topic = require('./models/topic');
 const crawler = require('./services/crawler');
-const target = '东站';
+const target = '城西';
+
+let filterTopicList = []; // 最终筛选过后的详情页信息列表
 
 for (let i = 0; i < 100; i += 25) {
   crawler.fetchSingleDoubanList(i)
@@ -12,7 +15,10 @@ for (let i = 0; i < 100; i += 25) {
             if (isNear(r.title, target)) {
               crawler.fetchSingleDoubanTopic(r.url)
                 .then(singleTopic => {
-                  Topic.update({ url: r.url }, { $set: { details: singleTopic.details, pics: singleTopic.pics } });
+                  Topic.findOneAndUpdate({ url: r.url }, { $set: { createTime: singleTopic.createTime, details: singleTopic.details, pics: singleTopic.pics } }, { new: true })
+                    .then(rr => {
+                      filterTopicList.push(rr);
+                    });
                 })
             }
           })
@@ -24,6 +30,8 @@ for (let i = 0; i < 100; i += 25) {
       }
     })
 }
+
+console.log(filterTopicList);
 
 // 判断给定的位置中是否含有目标关键词
 function isNear(location, target) {
