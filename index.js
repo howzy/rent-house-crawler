@@ -17,7 +17,7 @@ for (let i = 0; i < 100; i += 25) {
                 .then(singleTopic => {
                   Topic.findOneAndUpdate({ url: r.url }, { $set: { createTime: singleTopic.createTime, details: singleTopic.details, pics: singleTopic.pics } }, { new: true })
                     .then(rr => {
-                      filterTopicList.push(rr);
+                      mailer.sendMail(rr);
                     });
                 })
             }

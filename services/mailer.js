@@ -12,12 +12,26 @@ let transporter = nodemailer.createTransport({
   }
 });
 
-function sendMail (subject, html) {
+function sendMail(data) {
+  let html = '';
+  html += "<h1><a href=\"" + data.url + "\" target=\"_blank\">" + data.title + "</a></h1>"
+        + "<span>" + data.createTime + "</span>";
+
+  for (let i = 0; i < data.details.length; i++) {
+    html += "<p>" + data.details[i] + "</p>";
+  }
+
+  html += "<ul>";
+  for (let i = 0; i < data.pics.length; i++) {
+    html += "<li><img src=\"" + data.pics[i] + "\"></li>";
+  }
+  html += "</ul>";
+
   // setup email data with unicode symbols
   let mailOptions = {
     from: mailerConfig.user,
     to: mailerConfig.user,
-    subject: subject,
+    subject: data.title,
     html: html
   };
 
