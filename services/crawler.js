@@ -5,7 +5,7 @@ var Promise = require('bluebird');
 // 获取豆瓣租房列表页信息
 function fetchSingleDoubanList(start) {
   return new Promise((resolve, reject) => {
-    axios.get(`https://www.douban.com/group/HZhome/discussion?start=${start}`)
+    axios.get(`https://www.douban.com/group/145219/discussion?start=${start}`)
       .then(res => {
         let htmlText = res.data;
 
